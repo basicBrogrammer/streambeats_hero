@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require 'json'
+
+root = 'assets/audio/'
+files = Dir.glob(root + '**/*').map { |f| f.gsub(root, '') }
+result = files.each_with_object({}) do |file, hash|
+  genre, album, song = file.split('/')
+  hash[genre] ||= []
+  hash[genre] << { song: song, album: album } if !!song
+end
+File.write('assets/music_dictionary.json', result.to_json)
