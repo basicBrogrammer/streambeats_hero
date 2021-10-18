@@ -12,15 +12,20 @@ class StreambeatsHeroGame extends BaseGame {
   static final squarePaint = BasicPalette.white.paint();
   late Rect squarePos;
   int squareDirection = 1;
+  final String songPath;
+
+  StreambeatsHeroGame(this.songPath);
 
   @override
   Future<void> onLoad() async {
-    var data = await rootBundle.loadString('assets/music_data/lightwire.json');
+    var songDataPath = this.songPath + '.json';
+    var data = await rootBundle.loadString('assets/music_data/$songDataPath');
+    print(data);
     var musicJSON = json.decode(data);
     var _obstacleManager =
-        ObstacleManager(musicJSON['tempo'], musicJSON['beats']);
+        ObstacleManager(musicJSON['drum_tempo'], musicJSON['drum_beats']);
     add(_obstacleManager);
-    FlameAudio.bgm.play('lightwire.wav');
+    // FlameAudio.bgm.play('audio/edm/Dansu/11. Finding My way.wav');
     // FlameAudio.playLongAudio('music.mp3');
     // var shape = Rectangle(
     //   position: viewport.canvasSize / 2,

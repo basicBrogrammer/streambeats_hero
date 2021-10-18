@@ -48,8 +48,8 @@ flutter:
   assets:
     - assets/images/
     - assets/images/genre/edm.png
-    - assets/audio/
-    - assets/music_data/
+    - assets/audio/edm/Dansu/
+    - assets/music_data/edm/Dansu/
     - assets/music_dictionary.json
 
   # An image asset can refer to one or more resolution-specific "variants", see

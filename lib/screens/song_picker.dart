@@ -16,7 +16,8 @@ class SongPicker extends StatelessWidget {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => GamePlay(),
+                          builder: (context) => GamePlay(
+                              this.genre, entry['album'], entry['song']),
                         ),
                       );
                     },
