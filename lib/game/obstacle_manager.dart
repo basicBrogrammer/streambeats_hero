@@ -9,21 +9,22 @@ import 'package:streambeats_hero/game/obstacle.dart';
 class ObstacleManager extends BaseComponent
     with HasGameRef<StreambeatsHeroGame> {
   final double bpm;
-  final int lanes = 5;
+  final int lane;
+  List<dynamic> beats;
+  final int lanes;
+
   final double obstacleHeight = 20;
   late final double _obstacleSpeed;
-  Random _random = Random();
   double elapsedTime = 0;
-  List<dynamic> beats;
 
-  ObstacleManager(this.bpm, this.beats) : super() {
+  ObstacleManager(this.bpm, this.beats, this.lane, this.lanes) : super() {
     _obstacleSpeed = 3 * this.bpm / 60;
   }
 
   void _spawnObstacle() {
     var width = gameRef.canvasSize.x / this.lanes;
     var shape = Rectangle(
-      position: Vector2(width * _random.nextInt(5), 0),
+      position: Vector2(width * this.lane, 0),
       size: Vector2(width, obstacleHeight),
     );
 

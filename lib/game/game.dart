@@ -12,6 +12,7 @@ class StreambeatsHeroGame extends BaseGame {
   static final squarePaint = BasicPalette.white.paint();
   late Rect squarePos;
   int squareDirection = 1;
+  int numOfLanes = 2;
   final String songPath;
 
   StreambeatsHeroGame(this.songPath);
@@ -20,20 +21,17 @@ class StreambeatsHeroGame extends BaseGame {
   Future<void> onLoad() async {
     var songDataPath = this.songPath + '.json';
     var data = await rootBundle.loadString('assets/music_data/$songDataPath');
-    print(data);
     var musicJSON = json.decode(data);
-    var _obstacleManager =
-        ObstacleManager(musicJSON['drum_tempo'], musicJSON['drum_beats']);
-    add(_obstacleManager);
+
+    var _drumsManager = ObstacleManager(
+        musicJSON['drum_tempo'], musicJSON['drum_beats'], 0, this.numOfLanes);
+    var _otherManager = ObstacleManager(
+        musicJSON['other_tempo'], musicJSON['other_beats'], 1, this.numOfLanes);
+
+    add(_drumsManager);
+    add(_otherManager);
     // FlameAudio.bgm.play('audio/edm/Dansu/11. Finding My way.wav');
     // FlameAudio.playLongAudio('music.mp3');
-    // var shape = Rectangle(
-    //   position: viewport.canvasSize / 2,
-    //   size: Vector2(canvasSize.x / 5, 20),
-    // );
-    // var thing = ShapeComponent(shape, Paint()..color = Colors.white);
-
-    // add(thing);
   }
 
   @override
