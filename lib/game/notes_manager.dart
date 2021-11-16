@@ -13,13 +13,12 @@ class NotesManager extends Component with HasGameRef<StreambeatsHeroGame> {
   final double obstacleHeight = 20;
   late final double _obstacleSpeed;
   double elapsedTime = 0;
-  static final startSize = Vector2(60, 85);
   static final scaleFactor = 2.0;
 
   NotesManager(
       this.bpm, this.beats, this.startPosition, this.endPosition, this.sprite)
       : super() {
-    _obstacleSpeed = startSize.y * (this.bpm / 60);
+    _obstacleSpeed = Note.initSize.y * (this.bpm / 60);
   }
 
   void _spawnNote() {
@@ -35,7 +34,7 @@ class NotesManager extends Component with HasGameRef<StreambeatsHeroGame> {
     var obstacle = Note(
       sprite: sprite,
       position: startPosition,
-      size: startSize,
+      size: Note.initSize,
     )
       ..add(CombinedEffect(
         effects: [scale, move],
