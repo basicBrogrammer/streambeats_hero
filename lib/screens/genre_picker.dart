@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:streambeats_hero/screens/main_menu.dart';
 import 'package:streambeats_hero/screens/song_picker.dart';
 
 class GenrePicker extends StatefulWidget {

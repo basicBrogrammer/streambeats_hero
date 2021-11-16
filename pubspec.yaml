@@ -27,8 +27,14 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  flame: ^1.0.0-releasecandidate.13
-  flame_audio: ^1.0.0-rc.1
+  # flame: ^1.0.0-releasecandidate.16
+  flame:
+    git:
+      url: https://github.com/flame-engine/flame.git
+      ref: main
+      path: packages/flame
+
+  # flame_audio: ^1.0.0-rc.1
 
 dev_dependencies:
   flutter_test:
