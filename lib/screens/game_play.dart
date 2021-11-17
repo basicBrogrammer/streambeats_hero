@@ -1,6 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:streambeats_hero/game/game.dart';
+import 'package:streambeats_hero/overlays/game_over.dart';
 import 'package:streambeats_hero/overlays/pause_button.dart';
 import 'package:streambeats_hero/overlays/pause_menu.dart';
 
@@ -23,6 +24,9 @@ class GamePlay extends StatelessWidget {
           PauseMenu.ID: (BuildContext ctx, StreambeatsHeroGame game) {
             return PauseMenu(game);
           },
+          GameOver.ID: (BuildContext ctx, StreambeatsHeroGame game) {
+            return GameOver();
+          }
         },
       ),
     );

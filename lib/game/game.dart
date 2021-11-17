@@ -12,12 +12,8 @@ import 'package:streambeats_hero/game/note.dart';
 import 'package:streambeats_hero/game/notes_manager.dart';
 
 class StreambeatsHeroGame extends FlameGame with HasTappableComponents {
-  static const int squareSpeed = 400;
-  static final squarePaint = BasicPalette.white.paint();
-  late Rect squarePos;
-  int squareDirection = 1;
-  int numOfLanes = 2;
   final String songPath;
+  bool debugMode = true;
 
   StreambeatsHeroGame(this.songPath);
 
@@ -36,38 +32,38 @@ class StreambeatsHeroGame extends FlameGame with HasTappableComponents {
     final sprite = await Sprite.load("StreamBeatsNote.png");
     final halfW = canvasSize.x / 2;
 
-    var _drumsManager = NotesManager(
+    _addNoteManager(
+      sprite,
       musicJSON['drum_tempo'],
       musicJSON['drum_beats'],
-      Vector2(
-        halfW - Note.initSize.x,
-        0,
-      ),
-      Vector2(
-        halfW / 2,
-        canvasSize.y + Note.initSize.y * NotesManager.scaleFactor,
-      ),
-      sprite,
+      halfW - Note.initSize.x,
+      halfW / 2,
     );
-
-    var _otherManager = NotesManager(
+    _addNoteManager(
+      sprite,
       musicJSON['other_tempo'],
       musicJSON['other_beats'],
-      Vector2(
-        halfW + Note.initSize.x,
-        0,
-      ),
-      Vector2(
-        halfW * 1.5,
-        canvasSize.y + Note.initSize.y * NotesManager.scaleFactor,
-      ),
-      sprite,
+      halfW + Note.initSize.x,
+      halfW * 1.5,
     );
 
-    add(_drumsManager);
-    add(_otherManager);
     // FlameAudio.bgm.play('audio/edm/Dansu/11. Finding My way.wav');
     // FlameAudio.playLongAudio('music.mp3');
+    add(PolygonComponent.fromDefinition(
+      [
+        Vector2(-.97, -1),
+        Vector2(-1, -.95),
+        Vector2(-1, .95),
+        Vector2(-.97, 1),
+        Vector2(.97, 1),
+        Vector2(1, .95),
+        Vector2(1, -.95),
+        Vector2(.97, -1),
+      ],
+      size: Vector2(canvasSize.x * .95, Note.finalSize.y * 1.05),
+      paint: Paint()..color = Colors.white,
+      position: goalPosition,
+    ));
   }
 
   // @override
@@ -75,4 +71,32 @@ class StreambeatsHeroGame extends FlameGame with HasTappableComponents {
   //   super.onDetach();
   //   FlameAudio.bgm.stop();
   // }
+
+  void _addNoteManager(
+    Sprite sprite,
+    double bpm,
+    List<dynamic> beats,
+    double startX,
+    double endX,
+  ) {
+    var _manager = NotesManager(
+      bpm,
+      beats,
+      Vector2(
+        startX,
+        0,
+      ),
+      Vector2(
+        endX,
+        canvasSize.y + Note.initSize.y * NotesManager.scaleFactor,
+      ),
+      sprite,
+    );
+
+    add(_manager);
+  }
+
+  Vector2 get goalPosition {
+    return Vector2(canvasSize.x / 2, canvasSize.y - 1.5 * Note.finalSize.y);
+  }
 }
