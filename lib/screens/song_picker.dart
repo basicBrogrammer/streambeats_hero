@@ -14,11 +14,12 @@ class SongPicker extends StatelessWidget {
           children: songs
               .map((entry) => GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(
+                      Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(
                           builder: (context) => GamePlay(
                               this.genre, entry['album'], entry['song']),
                         ),
+                        (route) => false,
                       );
                     },
                     child: Container(

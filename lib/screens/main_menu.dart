@@ -12,7 +12,7 @@ class MainMenu extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 50.0),
                 child: Text(
-                  'Streambeats Touch',
+                  'Streambeats Hero',
                   style: TextStyle(
                     fontSize: 30.0,
                     color: Colors.black,

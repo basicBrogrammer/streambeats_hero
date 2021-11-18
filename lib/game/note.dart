@@ -30,12 +30,9 @@ class Note extends SpriteComponent
 
   @override
   bool onTapDown(TapDownInfo info) {
-    final tapY = info.eventPosition.game.y;
-    final goalZoneCenter = gameRef.canvasSize.y - (finalSize.y * 2);
-    final marginOfError = finalSize.y / 4;
-
-    if (goalZoneCenter + marginOfError < tapY &&
-        tapY < goalZoneCenter - marginOfError) {
+    final marginOfError = finalSize.y * 0.2;
+    if (gameRef.goalPosition.y - marginOfError < position.y &&
+        position.y < gameRef.goalPosition.y + marginOfError) {
       add(ColorEffect(color: Colors.green, duration: 0.2));
     } else {
       gameRef.paused = true;
